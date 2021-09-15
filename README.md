@@ -229,7 +229,42 @@ See `data/README_DATA.md`
 
 ---
 
-# 5. General Notes
+# 5. Notebook Structure
+
+See `000_Overview.ipynb`
+
+The basic structure contains 4 main series of notebooks for data curation, EDA
+model data transformation, and model execution, with conventions for contents
+and naming. All notebooks must be logically ordered.
+
+For example, a modelling project with a small number of raw datasets
+might use the following structure:
+
++ Data Curation `100_*` series:
+  + `100_Curate_ExtractRawData`
+  + `101_Curate_InitialClean`
+  + `102_Curate_FeatureEng_Elements`
+  + `103_Curate_FeatureEng_Aggregates`
+  + `104_Curate_FeatureEng_Histories`
+
++ EDA `200_*` series:
+  + `200_EDA_TargetFeatures`
+  + `201_EDA_PredictorFeatures`
+
++ Model Design and Data Transformations `300_*` series:
+  + `300_Model_Core_Architecture`
+  + `301_Model_Core_Transforms`
+
++ Model Execution `400_*` series:
+  + `400_Model_A_Execute`
+  + `401_Model_A_PPC`
+
+Additional `x00_*` series may be used, e.g. `800_*.` for demos / interactive
+data viz, or `900_*.ipynb` for experiments.
+
+---
+
+# 6. General Notes
 
 None
 
