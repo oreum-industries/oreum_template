@@ -11,7 +11,8 @@
 `raw/`
   `verbatim/`
     + These are raw data files **verbatim** exactly as supplied from client
-    + We run hashes against these to prove they are unchanged
+    + We run hashes against these using `hash_verbatim_files.sh`
+      to assign an SHA1 has with datetime to help any audit / governance
     + Files typically in `*xls*` or `.*db` or `.*sv` formats and very dirty
   `extracted/`
     + These are raw data files **extracted** from the initial dump that make it
