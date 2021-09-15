@@ -1,0 +1,24 @@
+name: oreum_template
+channels:
+- defaults
+dependencies:
+- dask==2021.1.*
+- ipython==7.20.*
+- jupyterlab==2.2.*
+- matplotlib==3.3.*
+- mkl==2019.4
+- mkl-service==2.3.*
+- nbconvert==5.6.1
+- numpy==1.19.*
+- pandas==1.2.*
+- patsy==0.5.*
+- pip==20.3.*
+- pyarrow==3.0.*
+- pylint==2.6.*
+- python==3.8.*
+- python-graphviz==0.16
+- scipy==1.6.*
+- seaborn==0.11.*
+- statsmodels==0.12.*
+- tqdm==4.56.*
+- conda-forge::watermark==2.1.*
