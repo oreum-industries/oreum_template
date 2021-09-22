@@ -9,12 +9,12 @@ To re-use: replace string `oreum_template` with your `project_name`.
 Notes:
 
 + Uses a scientific Python stack for scripting and interactive Jupyter Notebooks
-+ Hosted privately on
-[Oreum Industries' GitHub](https://github.com/oreum-industries/oreum_template)
++ Hosted on Oreum Industries [GitHub](https://github.com/oreum-industries)
 + Developed on a MBP13 2020, 2.3GHz i7, 32GB RAM, MacOS 10.15.7
 + Project began on <DATE>
-+ The README is MacOS and POSIX oriented
++ The README.md is MacOS and POSIX oriented
 + See LICENCE.md for licensing and copyright details
++ See CONTRIBUTORS.md for list of contributors
 
 # 1. Manual Installation
 
@@ -271,6 +271,14 @@ Additional `x00_*` series may be used, e.g.
 # 6. General Notes
 
 None
+
+---
+
+Copyright 2021 Oreum OÜ t/a Oreum Industries. All rights reserved.
+See LICENSE.md.
+
+Oreum OÜ t/a Oreum Industries, Sepapaja 6, Tallinn, 15551, Estonia,
+reg.16122291, [oreum.io](https://oreum.io)
 
 ---
 Oreum OÜ &copy; 2021
