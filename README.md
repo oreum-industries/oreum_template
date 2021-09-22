@@ -4,6 +4,8 @@
 
 Template project structure for R&D work, primarily for client projects.
 
+To re-use: replace string `oreum_template` with your `project_name`.
+
 Notes:
 
 + Uses a scientific Python stack for scripting and interactive Jupyter Notebooks
@@ -84,8 +86,8 @@ Some notes to help configure local development environment
 
 ```yaml
 [user]
-    name = <YOUR NAME>
-    email = <YOUR EMAIL ADDRESS>
+    name = <YOUR_NAME>
+    email = <YOUR_EMAIL_ADDRESS>
 ```
 
 ### 1.4.2 Jupyter config
@@ -229,9 +231,7 @@ See `data/README_DATA.md`
 
 ---
 
-# 5. Notebook Structure
-
-See `000_Overview.ipynb`
+# 5. Notebook Naming Structure
 
 The basic structure contains 4 main series of notebooks for data curation, EDA
 model data transformation, and model execution, with conventions for contents
@@ -243,9 +243,10 @@ might use the following structure:
 + Data Curation `100_*` series:
   + `100_Curate_ExtractRawData`
   + `101_Curate_InitialClean`
-  + `102_Curate_FeatureEng_Elements`
-  + `103_Curate_FeatureEng_Aggregates`
-  + `104_Curate_FeatureEng_Histories`
+  + `102_Curate_DetailedClean`
+  + `110_Curate_FeatureEng_Elements`
+  + `111_Curate_FeatureEng_Aggregates`
+  + `112_Curate_FeatureEng_Histories`
 
 + EDA `200_*` series:
   + `200_EDA_TargetFeatures`
@@ -255,12 +256,15 @@ might use the following structure:
   + `300_Model_Core_Architecture`
   + `301_Model_Core_Transforms`
 
-+ Model Execution `400_*` series:
++ Model Execution & Evaluation `400_*` series:
   + `400_Model_A_Execute`
   + `401_Model_A_PPC`
 
-Additional `x00_*` series may be used, e.g. `800_*.` for demos / interactive
-data viz, or `900_*.ipynb` for experiments.
+Additional `x00_*` series may be used, e.g.
+
++ `000_*.` for project overviews and background
++ `500_*.` for demos / interactive data viz
++ `900_*.ipynb` for experiments
 
 ---
 
@@ -269,4 +273,4 @@ data viz, or `900_*.ipynb` for experiments.
 None
 
 ---
-**Oreum OÜ &copy; 2021**
+Oreum OÜ &copy; 2021
