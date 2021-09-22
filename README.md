@@ -4,15 +4,17 @@
 
 Template project structure for R&D work, primarily for client projects.
 
+To re-use: replace string `oreum_template` with your `project_name`.
+
 Notes:
 
 + Uses a scientific Python stack for scripting and interactive Jupyter Notebooks
-+ Hosted privately on
-[Oreum Industries' GitHub](https://github.com/oreum-industries/oreum_template)
++ Hosted on Oreum Industries [GitHub](https://github.com/oreum-industries)
 + Developed on a MBP13 2020, 2.3GHz i7, 32GB RAM, MacOS 10.15.7
 + Project began on <DATE>
-+ The README is MacOS and POSIX oriented
++ The README.md is MacOS and POSIX oriented
 + See LICENCE.md for licensing and copyright details
++ See CONTRIBUTORS.md for list of contributors
 
 # 1. Manual Installation
 
@@ -84,8 +86,8 @@ Some notes to help configure local development environment
 
 ```yaml
 [user]
-    name = <YOUR NAME>
-    email = <YOUR EMAIL ADDRESS>
+    name = <YOUR_NAME>
+    email = <YOUR_EMAIL_ADDRESS>
 ```
 
 ### 1.4.2 Jupyter config
@@ -229,9 +231,7 @@ See `data/README_DATA.md`
 
 ---
 
-# 5. Notebook Structure
-
-See `000_Overview.ipynb`
+# 5. Notebook Naming Structure
 
 The basic structure contains 4 main series of notebooks for data curation, EDA
 model data transformation, and model execution, with conventions for contents
@@ -243,9 +243,10 @@ might use the following structure:
 + Data Curation `100_*` series:
   + `100_Curate_ExtractRawData`
   + `101_Curate_InitialClean`
-  + `102_Curate_FeatureEng_Elements`
-  + `103_Curate_FeatureEng_Aggregates`
-  + `104_Curate_FeatureEng_Histories`
+  + `102_Curate_DetailedClean`
+  + `110_Curate_FeatureEng_Elements`
+  + `111_Curate_FeatureEng_Aggregates`
+  + `112_Curate_FeatureEng_Histories`
 
 + EDA `200_*` series:
   + `200_EDA_TargetFeatures`
@@ -255,12 +256,15 @@ might use the following structure:
   + `300_Model_Core_Architecture`
   + `301_Model_Core_Transforms`
 
-+ Model Execution `400_*` series:
++ Model Execution & Evaluation `400_*` series:
   + `400_Model_A_Execute`
   + `401_Model_A_PPC`
 
-Additional `x00_*` series may be used, e.g. `800_*.` for demos / interactive
-data viz, or `900_*.ipynb` for experiments.
+Additional `x00_*` series may be used, e.g.
+
++ `000_*.` for project overviews and background
++ `500_*.` for demos / interactive data viz
++ `900_*.ipynb` for experiments
 
 ---
 
@@ -269,4 +273,12 @@ data viz, or `900_*.ipynb` for experiments.
 None
 
 ---
-**Oreum OÜ &copy; 2021**
+
+Copyright 2021 Oreum OÜ t/a Oreum Industries. All rights reserved.
+See LICENSE.md.
+
+Oreum OÜ t/a Oreum Industries, Sepapaja 6, Tallinn, 15551, Estonia,
+reg.16122291, [oreum.io](https://oreum.io)
+
+---
+Oreum OÜ &copy; 2021
