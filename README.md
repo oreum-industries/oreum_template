@@ -1,39 +1,55 @@
-**Oreum Industries**
+# README.md
 
-# Oreum Template Project `oreum_template`
+## Oreum Template Project `oreum_template`
 
-Template project structure for R&D work, primarily for client projects.
+2022Q1
+
+Template project structure for R&D work primarily for client projects, based
+on the widely used concept of
+[cookiecutter-data-science](https://drivendata.github.io/cookiecutter-data-science/).
 
 To re-use: replace string `oreum_template` with your `project_name`.
 
-Notes:
+### Contents
 
-+ Uses a scientific Python stack for scripting and interactive Jupyter Notebooks
-+ Hosted on Oreum Industries [GitHub](https://github.com/oreum-industries)
-+ Developed on a MBP13 2020, 2.3GHz i7, 32GB RAM, MacOS 10.15.7
-+ Project began on <DATE>
+1. Instructions for Manual Installation of the Environment
+2. Automatic Installation
+3. Additional Config and Testing
+4. Data Standards
+5. Notebook Standards
+6. Code Standards
+7. General Notes
+
+### Notes
+
++ We use a scientific Python stack for scripting / package development and
+interactive Jupyter Notebooks for reproducible research
++ The project is hosted privately on Oreum Industries Github at
+[oreum_template](https://github.com/oreum-industries/oreum_template)
++ Preoject began on <DATE>
 + The README.md is MacOS and POSIX oriented
 + See LICENCE.md for licensing and copyright details
 + See CONTRIBUTORS.md for list of contributors
 
-# 1. Manual Installation
+---
 
-This project is intended for interactive development and execution.
-As at 2021-08-31, the project is manually installed on MacOS: it may be
-automated in future.
+## 1. Instructions for Manual Installation of the Environment
 
-## 1.1 Pre-req: Continuum Anaconda Python 3.9.* 64bit
+This project is intended for interactive development and execution and is
+manually installed.
+
+### 1.1 Pre-req: Continuum Anaconda Python 3.9.* 64bit
 
 Download latest from:
 [https://www.continuum.io/downloads](https://www.continuum.io/downloads)
 
-## 1.2 Git clone the repo
+### 1.2 Git clone the repo
 
 Assumes `git` already installed
 
 ```zsh
 $> git clone https://github.com/oreum-industries/oreum_template
-$> cd oreum_template/
+$> cd oreum_template
 ```
 
 ### 1.3 Create virtual environment
@@ -53,12 +69,15 @@ which is usually in a state of flux, esp w.r.t `theano` and `aesara`.
 ```zsh
 $> conda update -n base -c defaults conda
 $> conda env create --file condaenv_oreum_template.yml
-$> activate oreum_template
+$> conda activate oreum_template
 ```
 
 #### 1.3.2 Additional packages using pip
 
-Note this includes `oreum_core` which contains several package dependencies.
+Note:
+
++ This includes `oreum_core` which contains several package dependencies
++ This will create a new file at project root `LICENSES_THIRD_PARTY.md`
 
 ```zsh
 $> ./pip_install.sh
@@ -66,7 +85,10 @@ $> ./pip_install.sh
 
 #### 1.3.3 Install graphviz to local system, OS dependent
 
-e.g. for MacOS:
+Note:
+
++ Graphviz required for pymc3 'drawing' the model graph
++ Instruction is for MacOS using `brew`
 
 ```zsh
 brew install graphviz
@@ -74,23 +96,27 @@ brew install graphviz
 
 #### 1.3.4 Optional jupyterlab extensions
 
+Note:
+
++ Adds spellchecking and nicer dark-mode theme
+
 ```zsh
 $> ./jupyter_install.sh
 ```
 
-## 1.4 Configs for Local Development
+### 1.4 Configs for Local Development
 
 Some notes to help configure local development environment
 
-### 1.4.1 Git config `~/.gitconfig`
+#### 1.4.1 Git config `~/.gitconfig`
 
 ```yaml
 [user]
-    name = <YOUR_NAME>
-    email = <YOUR_EMAIL_ADDRESS>
+    name = <YOUR NAME>
+    email = <YOUR EMAIL ADDRESS>
 ```
 
-### 1.4.2 Jupyter config
+#### 1.4.2 Jupyter config
 
 Assumes `jupyter` installed, sets defaults
 
@@ -100,33 +126,33 @@ $> jupyter qtconsole --generate-config
 $> jupyter nbconvert --generate-config
 ```
 
-### 1.4.3 Local theano config `~/.theanorc`
+#### 1.4.3 Local theano config `~/.theanorc`
 
 ```yaml
 [global]
 device=cpu
 ```
 
-## 1.5 Misc
+### 1.5 Misc
 
 None
 
 ---
 
-# 2. Automatic Installation
+## 2. Automatic Installation
 
 Pending creation of `makefile`. This will install onto a Linux server.
 
 ---
 
-# 3. Config and Testing
+## 3. Additional Config and Testing
 
-## 3.1 Test installation of scientific packages
+### 3.1 Test installation of scientific packages
 
 Optional tests to confirm good installation of:
 BLAS / MKL, numpy, scipy, pymc3, theano
 
-### 3.1.1 BLAS / MKL config
+#### 3.1.1 BLAS / MKL config
 
 View the BLAS / MKL install
 
@@ -137,35 +163,33 @@ $> python -c "import numpy as np; np.__config__.show()"
 Example output...
 
 ```zsh
-blas_info:
-    libraries = ['cblas', 'blas', 'cblas', 'blas']
+blas_mkl_info:
+    libraries = ['mkl_rt', 'pthread']
     library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
+    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
     include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
-    language = c
-    define_macros = [('HAVE_CBLAS', None)]
 blas_opt_info:
-    define_macros = [('NO_ATLAS_INFO', 1), ('HAVE_CBLAS', None)]
-    libraries = ['cblas', 'blas', 'cblas', 'blas']
+    libraries = ['mkl_rt', 'pthread']
     library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
+    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
     include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
-    language = c
-lapack_info:
-    libraries = ['lapack', 'blas', 'lapack', 'blas']
+lapack_mkl_info:
+    libraries = ['mkl_rt', 'pthread']
     library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
-    language = f77
+    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
+    include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
 lapack_opt_info:
-    libraries = ['lapack', 'blas', 'lapack', 'blas', 'cblas', 'blas', 'cblas', 'blas']
+    libraries = ['mkl_rt', 'pthread']
     library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
-    language = c
-    define_macros = [('NO_ATLAS_INFO', 1), ('HAVE_CBLAS', None)]
+    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
     include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
 Supported SIMD extensions in this NumPy install:
     baseline = SSE,SSE2,SSE3
     found = SSSE3,SSE41,POPCNT,SSE42,AVX,F16C,FMA3,AVX2,AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL
-    not found = AVX512_KNL
+    not found = AVX512_KNL    
 ```
 
-### 3.1.2 numpy
+#### 3.1.2 numpy
 
 ```zsh
 $> python -c "import numpy as np; np.test()"
@@ -174,11 +198,14 @@ $> python -c "import numpy as np; np.test()"
 Example output...
 
 ```zsh
--- Docs: https://docs.pytest.org/en/latest/warnings.html
-9902 passed, 435 skipped, 180 deselected, 17 xfailed, 3 xpassed, 2 warnings in 82.04s (0:01:22)
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+========================================================================================================================================================================= short test summary info ==========================================================================================================================================================================
+FAILED distutils/tests/test_system_info.py::TestSystemInfoReading::test_overrides - AssertionError: assert ['/Users/jon/...ep-model/lib'] == ['/var/folder.../tmpoqbcc85d']
+ERROR f2py/tests/test_module_doc.py::TestModuleDocString::test_module_docstring - ImportError: dlopen(/var/folders/53/4yp0hxld5ysc7b5_fq7rxsy00000gn/T/tmpfpcj431r/_test_ext_module_5418.cpython-39-darwin.so, 2): Symbol not found: __gfortran_os_error_at
+1 failed, 15521 passed, 84 skipped, 1253 deselected, 19 xfailed, 3 xpassed, 1 warning, 1 error in 198.12s (0:03:18)
 ```
 
-### 3.1.3 scipy
+#### 3.1.3 scipy
 
 ```zsh
 $> python -c "import scipy as sp; sp.test()"
@@ -187,98 +214,120 @@ $> python -c "import scipy as sp; sp.test()"
 Example output...
 
 ```zsh
-25474 passed, 2003 skipped, 10989 deselected, 76 xfailed, 5 xpassed, 11 warnings in 338.80s (0:05:38)
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+================================================================================================================================== 32765 passed, 2098 skipped, 11134 deselected, 105 xfailed, 9 xpassed, 41 warnings in 435.04s (0:07:15) ==================================================================================================================================
+
 ```
 
-### 3.1.4 pymc3
-
-Method 1:
-
-```zsh
-$> python -m pytest -xv --cov=pymc3 --cov-report=html pymc3/
-```
-
-Method 2:
-
-Takes a while on my MBP13 2020
+#### 3.1.4 pymc3
 
 ```zsh
 $> python -c "import pymc3 as pm; pm.test()"
 ```
 
-### 3.1.5 theano
+This takes a while and involves a lot of writing model runs to STDOUT. Let it
+run, this is important to confirm tests pass.
 
-Takes forever, see
-[installation docs](http://deeplearning.net/software/theano/install_macos.html)
-
-Quicker:
+Examnple output...
 
 ```zsh
-$> python -c "import theano; theano.test()"
-```
-
-Alternative (takes ~3 hours)
-
-```zsh
-$> theano-nose -s
+Ran 1132 tests in 3613.540s
 ```
 
 ---
 
-# 4. Data
+## 4. Data Standards
 
 See `data/README_DATA.md`
 
 ---
 
-# 5. Notebook Naming Structure
+## 5. Notebook Standards
 
-The basic structure contains 4 main series of notebooks for data curation, EDA
-model data transformation, and model execution, with conventions for contents
-and naming. All notebooks must be logically ordered.
+General best practices for naming / ordering / structure:
 
-For example, a modelling project with a small number of raw datasets
-might use the following structure:
-
-+ Data Curation `100_*` series:
-  + `100_Curate_ExtractRawData`
-  + `101_Curate_InitialClean`
-  + `102_Curate_DetailedClean`
-  + `110_Curate_FeatureEng_Elements`
-  + `111_Curate_FeatureEng_Aggregates`
-  + `112_Curate_FeatureEng_Histories`
-
-+ EDA `200_*` series:
-  + `200_EDA_TargetFeatures`
-  + `201_EDA_PredictorFeatures`
-
-+ Model Design and Data Transformations `300_*` series:
-  + `300_Model_Core_Architecture`
-  + `301_Model_Core_Transforms`
-
-+ Model Execution & Evaluation `400_*` series:
-  + `400_Model_A_Execute`
-  + `401_Model_A_PPC`
-
-Additional `x00_*` series may be used, e.g.
-
-+ `000_*.` for project overviews and background
-+ `500_*.` for demos / interactive data viz
-+ `900_*.ipynb` for experiments
++ Every Notebook is:
+    + Designed to be fully executable end-to-end
+    + Designed to behave as living documentation
+    + Named starting with a 3-digit reference with group-based ordering to
+    indicate logical flow, e.g:
+        + `000` series: Overview, discussion, presentational documents
+        + `100` series: Data Curation
+        + `200` series: Exploratory Data Analysis
+        + `300` series: Model Architecture and Data Transformations
+        + `400` series: Model Execution, Evaluation and Inference
+        + `500` series: Model Prediction
+        + `600`, `700`, `800` series: used for specific extensions if needed
+        + `900` series: Demos, Notes, Worked Explanations
++ Live Notebooks are:
+    + Present in the root project directory `/`
+    + Part of the final R&D project flow, and required in order to reproduce
+    the eventual findings & observations
+    + Guaranteed to be up to date with the latest code in `src/`
++ Rendered Notebooks are:
+    + Present as rendered PDFs in `notebook_renders/`
++ Archived Notebooks are:
+    + Present in `notebook_archive/`
+    + No longer required except for historical review and comparison
+    + May have fallen behind the latest local code and/or methods
 
 ---
 
-# 6. General Notes
+## 6. Code Standards
+
+This is primarily a Research & Development (R&D) project, but we strive to meet
+and exceed (even define) best practices for code quality, documentation and
+reproducibility for modern data science projects.
+
+Preferred structure:
+
++ `config/` for config files
++ `sql/` for SQL files
++ `src/` for all other code, usually Python custom functions & classes, e.g.
+
+```bash
+src/
+    calc.py      # custom calc utils 
+    curate.py    # custom data curation utils
+    model.py     # assuming this is a pymc3 modelling project, models go here
+```
+
+Best practices to make this project usable by all (developer, statstician, business)
+
++ Logical structuring of code files with modularisation and reusability
++ Small purposeful classes with abstracted object inheritance,
+and terse single-purpose functions
++ Variable and data parameterisation throughout and use of config files to
+inject globals
++ Informative naming for classes / functions / variables / data, and
+human-readable code
++ Specific and general error handling
++ Logging with rotation / archival
++ Detailed docstrings and type-hinting
++ Inline comments to explain complicated code / concepts to developers
++ Adherence to a consistent style guide and syntax, and use of linters
++ Well-organised Notebooks with logical ordering and “run-all” internal flow,
+and plenty of explanatory text and commentary to guide the reader
++ Use of virtual environments and/or containers
++ Build scripts for continuous integration and deployment
++ Unit tests and automated test scripts
++ Documentation to allow full reproducibility and maintenance
++ Commits have meaningful messages and small, iterative, manageable diffs to
+allow code review
++ Adherence to conventional branching structures and management of stale
+branches
++ Merges into master managed via pull requests (PRs) comprised of specific
+commits, and the PR linked to specific issue tickets
++ PRs setup to trigger manual code reviews and automated hooks to code
+formatting, unit testing, continuous integration (inc. automated integration
+and regression testing) and continuous deployment
++ New releases managed with tagging, fixed binaries, changelogs
+
+---
+
+## 7. General Notes
 
 None
 
 ---
-
-Copyright 2021 Oreum OÜ t/a Oreum Industries. All rights reserved.
-See LICENSE.md.
-
-Oreum OÜ t/a Oreum Industries, Sepapaja 6, Tallinn, 15551, Estonia,
-reg.16122291, [oreum.io](https://oreum.io)
-
----
-Oreum OÜ &copy; 2021
+Oreum OÜ &copy; 2022

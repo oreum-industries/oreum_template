@@ -12,11 +12,15 @@ fn="hashes_of_verbatim_files.txt"
 touch $fn
 echo $(date) >> "${fn}"
 
-for f in verbatim/*; do
-    [ -e "$f" ] || continue
-    echo "$f"
-    openssl sha1 "$f" >> "$fn"
-done
-
-echo "" >> "${fn}"
-
+hashAll() {
+    for i in "$1"/*; do
+        if [ -f "$i" ]; then                 # regular file
+            echo "$i"
+            openssl sha1 "$i" >> "$fn"
+        elif [ -d "$i" ]; then                # dir
+            hashAll "$i"
+        fi
+    done
+    echo "" >> "${fn}"
+}
+hashAll "verbatim"
