@@ -26,9 +26,9 @@ To re-use: replace string `oreum_template` with your `project_name`.
 interactive Jupyter Notebooks for reproducible research
 + The project is hosted privately on Oreum Industries Github at
 [oreum_template](https://github.com/oreum-industries/oreum_template)
-+ Preoject began on <DATE>
++ Project began on <DATE>
 + The README.md is MacOS and POSIX oriented
-+ See LICENCE.md for licensing and copyright details
++ See LICENSE.md for licensing and copyright details
 + See CONTRIBUTORS.md for list of contributors
 
 ---
@@ -228,7 +228,7 @@ $> python -c "import pymc3 as pm; pm.test()"
 This takes a while and involves a lot of writing model runs to STDOUT. Let it
 run, this is important to confirm tests pass.
 
-Examnple output...
+Example output...
 
 ```zsh
 Ran 1132 tests in 3613.540s
@@ -285,19 +285,19 @@ Preferred structure:
 + `sql/` for SQL files
 + `src/` for all other code, usually Python custom functions & classes, e.g.
 
-```bash
+```zsh
 src/
     calc.py      # custom calc utils 
     curate.py    # custom data curation utils
     model.py     # assuming this is a pymc3 modelling project, models go here
 ```
 
-Best practices to make this project usable by all (developer, statstician, business)
+Best practices to make this project usable by all (developer, statstician, biz):
 
-+ Logical structuring of code files with modularisation and reusability
++ Logical structuring of code files with modularization and reusability
 + Small purposeful classes with abstracted object inheritance,
 and terse single-purpose functions
-+ Variable and data parameterisation throughout and use of config files to
++ Variable and data parameterization throughout and use of config files to
 inject globals
 + Informative naming for classes / functions / variables / data, and
 human-readable code
@@ -306,7 +306,7 @@ human-readable code
 + Detailed docstrings and type-hinting
 + Inline comments to explain complicated code / concepts to developers
 + Adherence to a consistent style guide and syntax, and use of linters
-+ Well-organised Notebooks with logical ordering and “run-all” internal flow,
++ Well-organized Notebooks with logical ordering and “run-all” internal flow,
 and plenty of explanatory text and commentary to guide the reader
 + Use of virtual environments and/or containers
 + Build scripts for continuous integration and deployment
