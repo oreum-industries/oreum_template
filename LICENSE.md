@@ -91,4 +91,4 @@ of the Republic of Estonia.
 All rights reserved.
 
 ---
-**Oreum Industries &copy; 2021**
+Oreum OÜ &copy; 2022

@@ -244,7 +244,7 @@ See `data/README_DATA.md`
 
 ## 5. Notebook Standards
 
-General best practices for Naming, Ordering, Structure:
+General best practices for naming / ordering / structure:
 
 + Every Notebook is:
     + Designed to be fully executable end-to-end
@@ -279,9 +279,20 @@ This is primarily a Research & Development (R&D) project, but we strive to meet
 and exceed (even define) best practices for code quality, documentation and
 reproducibility for modern data science projects.
 
-As such, we implement a number of practices in order to make this project
-immediately usable by the technical developer, the statistical expert, and the
-informed business user:
+Preferred structure:
+
++ `config/` for config files
++ `sql/` for SQL files
++ `src/` for all other code, usually Python custom functions & classes, e.g.
+
+```bash
+src/
+    calc.py      # custom calc utils 
+    curate.py    # custom data curation utils
+    model.py     # assuming this is a pymc3 modelling project, models go here
+```
+
+Best practices to make this project usable by all (developer, statstician, business)
 
 + Logical structuring of code files with modularisation and reusability
 + Small purposeful classes with abstracted object inheritance,

@@ -37,3 +37,6 @@ stored locally for development
 + `prepared/`
     + These are fully prepared files for use in analysis and modelling
     + These files are typically in `.parquet` format for optimised storage.
+
+---
+Oreum OÜ &copy; 2022
