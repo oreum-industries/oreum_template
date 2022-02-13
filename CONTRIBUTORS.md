@@ -1,6 +1,5 @@
 # CONTRIBUTORS.md
 
-Names should be added to this file as:
-Firstname Lastname <email_address>
+Names should be added to this file as: `Firstname Lastname <email_address>`
 
-Jonathan Sedar <jonathan.sedar@oreum.io>
++ Jonathan Sedar <jonathan.sedar@oreum.io>

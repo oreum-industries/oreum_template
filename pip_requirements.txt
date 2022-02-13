@@ -1,0 +1,26 @@
+# Manually created as-at 2021-12-19
+# Installation Notes:
+#  + This pip_requirements is intended to be run within a pre-created conda env 
+#    see file `condaenv_pep-model.yml` file
+#  + Hard-pinned graphviz to 2-level version == a.b
+#  + Hard-pinned scientific & pymc3-related packages to 2-level version == a.b.*
+#  + Lower-pinned general packages to 2-level version >= a.b.*
+#  + Package `oreum-core` contains several scientific packages you might 
+#    otherwise expect to see here. For details see:
+#    https://github.com/oreum-industries/oreum_core/pip_requirements.txt
+#  + During development, install oreum_core locally: so git+ is commented out
+click-spinner>=0.1.*
+confuse>=1.7.*
+graphviz==0.17
+hypothesis==6.29.*
+nose==1.3.*
+openpyxl==3.0.*
+pip-licenses>=3.5.*
+pyarrow>=6.0.*
+pylint>=2.10.*
+pyspellchecker>=0.5.*
+pytest==6.2.*
+tqdm>=4.62.*
+typer>=0.4.*
+us>=2.0.*
+# git+https://github.com/oreum-industries/oreum_core.git@v0.2.0#egg=oreum_core
