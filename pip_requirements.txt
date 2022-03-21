@@ -13,7 +13,7 @@ confuse==1.7.*
 graphviz==0.19.*
 openpyxl==3.0.*
 pip-licenses==3.5.*
-pylint==3.0.*
+pylint==2.12.*
 pyspellchecker==0.6.*
 tqdm==4.63.*
 git+https://github.com/oreum-industries/oreum_core.git@v0.2.1#egg=oreum_core
