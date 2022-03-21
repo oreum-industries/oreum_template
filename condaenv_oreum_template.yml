@@ -4,17 +4,17 @@ name: oreum_template
 channels:
 - defaults
 dependencies:
-- ipython>=7.29.*
-- jupyterlab>=3.2.*
+- ipython==8.1.*
+- jupyterlab==3.3.*
 - mkl==2021.4.*
 - mkl-service==2.4.*
 - numpy==1.21.*   # note install here to compile against Intel MKL BLAS
-- pandas==1.3.*
+- pandas==1.4.*
 - pip==21.2.*
 - psycopg2==2.8.*
 - python==3.9.*
 - scipy==1.7.*    # note install here to compile against Intel MKL BLAS
 - sqlalchemy==1.4.*
-- conda-forge::pymc3==3.11.5
-- conda-forge::theano-pymc==1.1.2
+- conda-forge::pymc3==3.11.*
+- conda-forge::theano-pymc==1.1.*
 - conda-forge::watermark==2.2.*
