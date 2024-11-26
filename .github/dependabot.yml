@@ -9,7 +9,7 @@ updates:
     schedule:
       interval: "weekly"
     target-branch: "deps"
-    groups:
-      python-packages:
-        patterns:
-          - "*"
+    # groups:
+    #   python-packages:
+    #     patterns:
+    #       - "*"
