@@ -1,0 +1,20 @@
+[sqlfluff]
+dialect = tsql
+encoding = utf-8
+exclude_rules = aliasing.forbid, structure.column_order
+format = github-annotation-native
+
+# See https://docs.sqlfluff.com/en/stable/configuration.html#defaultconfig
+
+[sqlfluff:rules:capitalisation.identifiers]
+unquoted_identifiers_policy = aliases
+
+[sqlfluff:rules:layout.long_lines]
+ignore_comment_clauses = true
+ignore_comment_lines = true
+max_line_length = 120
+indent_unit = space
+
+[sqlfluff:rules:references.special_chars]
+additional_allowed_characters = /[]$
+allow_space_in_identifier = true
