@@ -2,113 +2,226 @@
 
 ## Oreum Template Project `oreum_template`
 
-2022Q1
-
 Template project structure for R&D work primarily for client projects, based
 on the widely used concept of
-[cookiecutter-data-science](https://drivendata.github.io/cookiecutter-data-science/).
+[cookiecutter-data-science](https://cookiecutter-data-science.drivendata.org/).
+
+Hugely updated over the years, now up to date with Oreum Industries' current
+preferred best practices, packages, installations, structures etc.
 
 To re-use: replace string `oreum_template` with your `project_name`.
 
+
+[![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org)
+[![CI](https://github.com/oreum-industries/oreum_template/workflows/ci/badge.svg)](https://github.com/oreum-industries/oreum_template/actions/workflows/ci.yml)
+[![code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![code style: interrogate](https://raw.githubusercontent.com/oreum-industries/oreum_core/master/assets/img/interrogate_badge.svg)](https://pypi.org/project/interrogate/)
+[![code security: bandit](https://img.shields.io/badge/code%20security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+
+
 ### Contents
 
-1. Instructions for Manual Installation of the Environment
-2. Automatic Installation
-3. Additional Config and Testing
-4. Data Standards
-5. Notebook Standards
-6. Code Standards
-7. General Notes
-
-### Notes
-
-+ We use a scientific Python stack for scripting / package development and
-interactive Jupyter Notebooks for reproducible research
-+ The project is hosted privately on Oreum Industries Github at
-[oreum_template](https://github.com/oreum-industries/oreum_template)
-+ Project began on <DATE>
-+ The README.md is MacOS and POSIX oriented
-+ See LICENSE.md for licensing and copyright details
-+ See CONTRIBUTORS.md for list of contributors
+1. Project Description, Scope, Directory Structure
+2. How to Install and Run on a Local Developer Machine
+3. Code Standards
+4. Notebook Standards
+5. Data Standards
+6. General Notes
 
 ---
 
-## 1. Instructions for Manual Installation of the Environment
+## 1. Project Description, Technical Overview, Directory Structure
 
-This project is intended for interactive development and execution and is
-manually installed.
+### 1.1 Project Description & Scope
 
-### 1.1 Pre-req: Continuum Anaconda Python 3.9.* 64bit
+This is an initial implementation of an internal project by Oreum Industries -
+an implementation of copula-based Expected Loss Cost forecasting.
 
-Download latest from:
-[https://www.continuum.io/downloads](https://www.continuum.io/downloads)
+This project **is**:
 
-### 1.2 Git clone the repo
++ A work in progress (v0.y.z) and liable to breaking changes and inconveniences
+  to the user
++ Solely designed for ease of use and rapid development by employees of Oreum
+  Industries, and selected clients with guidance
 
-Assumes `git` already installed
+This project **is not**:
+
++ Intended for public usage and will not be supported for public usage
++ Intended for contributions by anyone not an employee of Oreum Industries,
+  and unsolicited contributions will not be accepted
+
+
+### 1.2 Technical Overview
+
++ Project began on 2022-01-01
++ The `README.md` is MacOS and POSIX oriented
++ See `LICENCE.md` for licensing and copyright details
++ See `pyproject.toml` for authors, package dependencies etc
++ For code repository access see
+  [GitHub](https://github.com/oreum-industries/oreum_template)
++ Implementation:
+  + This project is enabled by a modern, open-source, advanced software stack
+    for data curation, statistical analysis and predictive modelling
+  + This project is end-to-end, fully reproducible data science solutions: via
+    notebooks, scripts, CLI & API, automated environment & package management,
+    continuous integration, version control and rich documentation
+  + Specifically we use an open-source Python-based suite of software packages,
+    the core of which is often known as the Scientific Python stack, supported
+    by [NumFOCUS](https://numfocus.org)
+  + Once installed (see section 2), see `LICENSES_THIRD_PARTY.md` for full
+    details of all package licences
++ Environments: this project was originally developed on a Macbook Air M2
+  (Apple Silicon ARM64) running MacOS 14.7 (Sonoma) using `osx-arm64` Accelerate
+
+
+
+### 1.3 Project File Structure
+
+The repo is structured for R&D usage. The major items to be
+aware of are:
+
+```txt
+/
+↳ dotfiles         - various dotfiles to configure the repo
+↳ Makefile         - recipes to build the dev env
+↳ README.md        - this readme file
+↳ LICENSE.md       - licensing and copyright details
+↳ assets/          - non-code based images and external pdfs
+↳ data/            - placeholder for data files (to be managed via Git LFS)
+↳ notebooks/       - Jupyter Notebooks
+↳ plots/           - output plots saved as images
+↳ sql/             - SQL files
+↳ src/             - Python modules
+  ↳ config/          - configs if used
+  ↳ dataprep/        - data transforms / feature engineering pre-model
+  ↳ engine/          - classes to operate models
+  ↳ model/           - classes define statistical models
+```
+
+---
+
+
+## 2. How to Install and Run on a Local Developer Machine
+
+For local development on MacOS.
+
+
+### 2.0 Pre-requisite installs via `homebrew`
+
+1. Install Homebrew, see instructions at [https://brew.sh](https://brew.sh)
+2. Install `direnv`, `git`, `git-lfs`, `graphviz`, `zsh`
+
+```zsh
+$> brew update && brew upgrade
+$> brew install direnv git git-lfs graphviz zsh
+```
+
+
+### 2.1 Git clone the repo
+
+Assumes `direnv`, `git`, `git-lfs`, `graphviz` and `zsh` installed as above
 
 ```zsh
 $> git clone https://github.com/oreum-industries/oreum_template
 $> cd oreum_template
 ```
+Then allow `direnv` on MacOS to automatically run file `.envrc` upon directory open
 
-### 1.3 Create virtual environment
+
+### 2.2 Create virtual environment and install dev packages
 
 Notes:
 
-+ This compound method uses `conda` for main environment and packages,
-and `pip` for selected additional packages handled better by pip than conda.
-+ Packages might not be the very latest because we want stability for `pymc3`
-which is usually in a state of flux, esp w.r.t `theano` and `aesara`.
++ We use `conda` virtual envs controlled by `mamba` (quicker than `conda`)
++ We install packages using `miniforge` (sourced from the `conda-forge` repo)
+  wherever possible and only use `pip` for packages that are handled better by
+  `pip` and/or more up-to-date on [pypi](https://pypi.org)
++ Packages might not be the very latest because we want stability for `pymc`
+  which is usually in a state of development flux
 + See [cheat sheet of conda commands](https://conda.io/docs/_downloads/conda-cheatsheet.pdf)
-+ Use `direnv` on MacOS to automatically run file `.envrc` upon directory open
-+ Jupyterlab extensions need [NodeJS](https://nodejs.org/en/) on system
++ The `Makefile` creates a dev env and will also download and preinstall
+  `miniforge` if not yet installed on your system
 
-#### 1.3.1 Main environment and packages using conda
 
-```zsh
-$> conda update -n base -c defaults conda
-$> conda env create --file condaenv_oreum_template.yml
-$> conda activate oreum_template
-```
+#### 2.2.1 Create the dev environment
 
-#### 1.3.2 Additional packages using pip
-
-Note:
-
-+ This includes `oreum_core` which contains several package dependencies
-+ This will create a new file at project root `LICENSES_THIRD_PARTY.md`
+From the dir above `oreum_template/` project dir:
 
 ```zsh
-$> ./pip_install.sh
+$> make -C oreum_template dev
 ```
 
-#### 1.3.3 Install graphviz to local system, OS dependent
+This will also create some files to help confirm / diagnose successful installation:
 
-Note:
++ `dev/install_log/blas_info.txt` for the `BLAS MKL` installation for `numpy`
++ `dev/install_log/pipdeptree[_rev].txt` lists installed package deps (and reversed)
++ `LICENSES_THIRD_PARTY.md` details the license for each package used
 
-+ Graphviz required for pymc3 'drawing' the model graph
-+ Instruction is for MacOS using `brew`
+
+#### 2.2.2 (Optional best practice) Test successful installation of dev environment
 
 ```zsh
-brew install graphviz
+$> make test-dev-env
 ```
 
-#### 1.3.4 Optional jupyterlab extensions
+This will also add files `dev/install_log/[tests_numpy|test_scipy].txt` which
+detail successful installation (or not) for `numpy`, `scipy`
 
-Note:
 
-+ Adds spellchecking and nicer dark-mode theme
+#### 2.2.3 To install additional deps from the `pyproject` file:
+
+NOTE the quotes required by zsh
 
 ```zsh
-$> ./jupyter_install.sh
+$> pip install ".[plots]"
 ```
 
-### 1.4 Configs for Local Development
+#### 2.2.4 To remove the dev environment (Useful during env install experimentation):
+
+From the dir above `oreum_template/` project dir:
+
+```zsh
+$> make -C oreum_template uninstall-env
+```
+
+
+### 2.3 Code Linting & Repo Control
+
+#### 2.3.1 Pre-commit
+
+We use [pre-commit](https://pre-commit.com) to run a suite of automated tests
+for code linting & quality control and repo control prior to commit on local
+development machines.
+
++ This is installed as part of `make dev` which you already ran.
++ See `.pre-commit-config.yaml` for details
+
+
+#### 2.3.2 Github Actions
+
+We use [Github Actions](https://docs.github.com/en/actions/using-workflows) aka
+Workflows to run a suite of automated tests for commits received at the origin
+(i.e. GitHub)
+
++ See `.github/workflows/*` for details
+
+
+#### 2.3.3 Git LFS
+
+We use [Git LFS](https://git-lfs.github.com) to store any large files alongside
+the repo. This can be useful to replicate exact environments during development
+and/or for automated tests
+
++ This requires a local machine install
+  (see [Getting Started](https://git-lfs.github.com))
++ See `.gitattributes` for details
+
+
+### 2.4 Configs for Local Development
 
 Some notes to help configure local development environment
 
-#### 1.4.1 Git config `~/.gitconfig`
+#### 2.4.1 Git config `~/.gitconfig`
 
 ```yaml
 [user]
@@ -116,218 +229,214 @@ Some notes to help configure local development environment
     email = <YOUR EMAIL ADDRESS>
 ```
 
-#### 1.4.2 Jupyter config
 
-Assumes `jupyter` installed, sets defaults
+### 2.5 Install VSCode IDE
 
-```zsh
-$> jupyter notebook --generate-config
-$> jupyter qtconsole --generate-config
-$> jupyter nbconvert --generate-config
-```
+We strongly recommend using [VSCode](https://code.visualstudio.com) for all
+development on local machines, and this is a hard pre-requisite to use
+the `.devcontainer` environment (see section 3)
 
-#### 1.4.3 Local theano config `~/.theanorc`
-
-```yaml
-[global]
-device=cpu
-```
-
-### 1.5 Misc
-
-None
-
----
-
-## 2. Automatic Installation
-
-Pending creation of `makefile`. This will install onto a Linux server.
-
----
-
-## 3. Additional Config and Testing
-
-### 3.1 Test installation of scientific packages
-
-Optional tests to confirm good installation of:
-BLAS / MKL, numpy, scipy, pymc3, theano
-
-#### 3.1.1 BLAS / MKL config
-
-View the BLAS / MKL install
+This repo includes relevant lightweight project control and config in:
 
 ```zsh
-$> python -c "import numpy as np; np.__config__.show()"
-```
-
-Example output...
-
-```zsh
-blas_mkl_info:
-    libraries = ['mkl_rt', 'pthread']
-    library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
-    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
-    include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
-blas_opt_info:
-    libraries = ['mkl_rt', 'pthread']
-    library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
-    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
-    include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
-lapack_mkl_info:
-    libraries = ['mkl_rt', 'pthread']
-    library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
-    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
-    include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
-lapack_opt_info:
-    libraries = ['mkl_rt', 'pthread']
-    library_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/lib']
-    define_macros = [('SCIPY_MKL_H', None), ('HAVE_CBLAS', None)]
-    include_dirs = ['/Users/jon/opt/anaconda3/envs/oreum_template/include']
-Supported SIMD extensions in this NumPy install:
-    baseline = SSE,SSE2,SSE3
-    found = SSSE3,SSE41,POPCNT,SSE42,AVX,F16C,FMA3,AVX2,AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL
-    not found = AVX512_KNL    
-```
-
-#### 3.1.2 numpy
-
-```zsh
-$> python -c "import numpy as np; np.test()"
-```
-
-Example output...
-
-```zsh
--- Docs: https://docs.pytest.org/en/stable/warnings.html
-========================================================================================================================================================================= short test summary info ==========================================================================================================================================================================
-FAILED distutils/tests/test_system_info.py::TestSystemInfoReading::test_overrides - AssertionError: assert ['/Users/jon/...ep-model/lib'] == ['/var/folder.../tmpoqbcc85d']
-ERROR f2py/tests/test_module_doc.py::TestModuleDocString::test_module_docstring - ImportError: dlopen(/var/folders/53/4yp0hxld5ysc7b5_fq7rxsy00000gn/T/tmpfpcj431r/_test_ext_module_5418.cpython-39-darwin.so, 2): Symbol not found: __gfortran_os_error_at
-1 failed, 15521 passed, 84 skipped, 1253 deselected, 19 xfailed, 3 xpassed, 1 warning, 1 error in 198.12s (0:03:18)
-```
-
-#### 3.1.3 scipy
-
-```zsh
-$> python -c "import scipy as sp; sp.test()"
-```
-
-Example output...
-
-```zsh
--- Docs: https://docs.pytest.org/en/stable/warnings.html
-================================================================================================================================== 32765 passed, 2098 skipped, 11134 deselected, 105 xfailed, 9 xpassed, 41 warnings in 435.04s (0:07:15) ==================================================================================================================================
-
-```
-
-#### 3.1.4 pymc3
-
-```zsh
-$> python -c "import pymc3 as pm; pm.test()"
-```
-
-This takes a while and involves a lot of writing model runs to STDOUT. Let it
-run, this is important to confirm tests pass.
-
-Example output...
-
-```zsh
-Ran 1132 tests in 3613.540s
+oreum_template.code-workspace
+.vscode/extensions.json
+.vscode/settings.json
 ```
 
 ---
 
-## 4. Data Standards
+## 3. Code Standards
+
+Even when writing R&D code, we strive to meet and exceed (even define) best
+practices for code quality, documentation and reproducibility for modern
+data science projects.
+
+### 3.1 Code Linting & Repo Control
+
+We use a suite of automated tools to check and enforce code quality. We indicate
+the relevant shields at the top of this README. See section 1.4 above for how
+this is enforced at precommit on developer machines and upon PR at the origin as
+part of our CI process, prior to master branch merge.
+
+These include:
+
++ [`ruff`](https://docs.astral.sh/ruff/) - extremely fast standardised linting
+  and formatting, which replaces `black`, `flake8`, `isort`
++ [`interrogate`](https://pypi.org/project/interrogate/) - ensure complete Python
+  docstrings
++ [`bandit`](https://github.com/PyCQA/bandit) - test for common Python security
+  issues
+
+We also run a suite of general tests pre-packaged in
+[`precommit`](https://pre-commit.com).
+
+
+### 3.2 Package-like structure
+
+Where suitable, we break out commonly used functions and classes to module files
+under the `src/` directory - this gives clear, convenient and easier code
+control than when it's embedded inside notebooks. Note for clarity, that we
+don't compile this code or release separately to the project.
+
+
+## 4. Notebook Standards
+
+General best practices for naming / ordering / structure.
+
+### 4.1 General Principles
+
+Every Notebook is:
+
++ Fully executable end-to-end, with linear non-cyclic flow
++ Living documentation with extensive text and plot-based explanation
++ Named starting with a 3-digit reference with group-based ordering to
+indicate logical flow and dependencies, e.g:
+  + `000` series: Overview, discussion, presentational documents
+  + `100` series: Data Curation
+  + `200` series: Exploratory Data Analysis
+  + `300` series: Model Architecture and Data Transformations
+  + `400` series: Model Design, Development, Evaluation and Inference
+  + `500` series: Model Finalisation for Production Use
+  + `600`, `700`, `800` series: used for specific extensions if needed
+  + `900` series: Demos, Notes, Worked Explanations.
+
+
+### 4.2. Live Notebooks
+
+Live Notebooks are:
+
++ Present in the `/notebooks` directory
++ Part of the final R&D project flow, and required in order to reproduce
+  the eventual findings & observations
++ Guaranteed to be up to date with the latest code in `src/`.
+
+### 4.3 Rendered Notebooks
+
+Rendered Notebooks are:
+
++ Present as rendered PDFs or `reveal.js` Slides in `notebooks/renders/`
++ Created somewhat as-needed for offline print-based discussion with
+  stakeholders.
+
+We use `nbconvert` to render to PDF or reveal.js HTML slides using configs.
+From inside the `notebooks/` dir, run:
+
+```sh
+$> jupyter nbconvert --config renders/config_pdf.py
+$> jupyter nbconvert --config renders/config_slides.py
+```
+
+### 4.4 Archived Notebooks
+
+Archived Notebooks are:
+
++ Present in `notebooks/archive/`
++ No longer required, but kept around for historical audit, discussion,
+  code examples
++ May have fallen behind the latest local code and/or methods.
+
+---
+
+## 5. Data Standards
 
 See `data/README_DATA.md`
 
----
+IMPORTANT NOTE on terminology / naming convention and dataset partitioning
+based on the information present and dataset usage.
 
-## 5. Notebook Standards
+```text
+Dataset terminology / partitioning / purpose:
 
-General best practices for naming / ordering / structure:
-
-+ Every Notebook is:
-    + Designed to be fully executable end-to-end
-    + Designed to behave as living documentation
-    + Named starting with a 3-digit reference with group-based ordering to
-    indicate logical flow, e.g:
-        + `000` series: Overview, discussion, presentational documents
-        + `100` series: Data Curation
-        + `200` series: Exploratory Data Analysis
-        + `300` series: Model Architecture and Data Transformations
-        + `400` series: Model Execution, Evaluation and Inference
-        + `500` series: Model Prediction
-        + `600`, `700`, `800` series: used for specific extensions if needed
-        + `900` series: Demos, Notes, Worked Explanations
-+ Live Notebooks are:
-    + Present in the root project directory `/`
-    + Part of the final R&D project flow, and required in order to reproduce
-    the eventual findings & observations
-    + Guaranteed to be up to date with the latest code in `src/`
-+ Rendered Notebooks are:
-    + Present as rendered PDFs in `notebook_renders/`
-+ Archived Notebooks are:
-    + Present in `notebook_archive/`
-    + No longer required except for historical review and comparison
-    + May have fallen behind the latest local code and/or methods
-
----
-
-## 6. Code Standards
-
-This is primarily a Research & Development (R&D) project, but we strive to meet
-and exceed (even define) best practices for code quality, documentation and
-reproducibility for modern data science projects.
-
-Preferred structure:
-
-+ `config/` for config files
-+ `sql/` for SQL files
-+ `src/` for all other code, usually Python custom functions & classes, e.g.
-
-```zsh
-src/
-    calc.py      # custom calc utils 
-    curate.py    # custom data curation utils
-    model.py     # assuming this is a pymc3 modelling project, models go here
+|<---------- Relevant domain of all data for our analyses & models ---------->|
+|<----- "Observed" historical target ------>||<- "Unobserved" future target ->|
+|<----------- "Working" dataset ----------->||<----- "Forecast" dataset ----->|
+|<- Training/CrossVal ->||<- Test/Holdout ->|
 ```
 
-Best practices to make this project usable by all (developer, statstician, biz):
++ The **"Observed"** historical target dataset has:
+  + a _known_ exogenous (target) feature value
+  + known endogenous feature values to allow model regression
+  + a hypothetical structure that we use to design the model
+
+  + The **"Working"** dataset is the same as this "Observed" data, and may be
+    split into:
+    + A **Training/CrossVal** set used to fit the model. This may be
+      partitioned into multiple Cross-Validation sets if required by the model
+      architecture and fitting process
+    + A **Test/Holdout** used to evaluate the model fit against a known target
+    + We can use this Working set _in full_ when fitting the final model for
+      Production, because this yields the most performant model
+
++ The **"Unobserved"** future target dataset has:
+  + an _unknown_ exogenous (target) feature value
+  + known endogenous feature values to allow model regression
+  + a hypothetical structure that we use to design the model
+
+  + The **"Forecast"** dataset is the same as this "Unobserved" data, and is
+    generally what we will try to predict upon in Production
+    + We might create predictions for individual datapoints or in bulk
+    + _If_ the entities in the data evolve over time (e.g. a set of policies
+      each with evolving premium payments and claim developments),
+      and _if_ the endogenous features don't evolve with time (they are static
+      not dynamic) then we can artificially create a Forecast dataset by
+      extending the Working dataset forward in time.
+
+Further note:
+
++ We may refer to "In-Sample" and "Out-of-Sample" datasets. The
+  former is the data used to train the model and the latter to evaluate the
+  model against a _known_ exogenous (target) value or forecast an _unknown_
+  exogenous (target) value. So they can be used during Working or Forecasting.
+
++ Strictly speaking, our Bayesian modeling workflow does not require us to
+  evaluate the model on a Test/Holdout set because we can use in-sample
+  Pareto-smoothed Leave-One-Out (LOO-PIT) cross-validation testing. This is more
+  powerful, and lets us fit & evaluate the model using the full Working set.
+
++ However, purely to aid reader comprehension and demonstrate the out-of-sample
+  prediction workflow, we may use the practice of a known Test/Holdout set.
+
+
+## 6. General Notes
+
+We aim to make this project usable by all (developer, statistician, biz):
 
 + Logical structuring of code files with modularization and reusability
-+ Small purposeful classes with abstracted object inheritance,
-and terse single-purpose functions
++ Small purposeful classes with abstracted object inheritance, and terse
+  single-purpose functions
 + Variable and data parameterization throughout and use of config files to
-inject globals
+  inject globals
 + Informative naming for classes / functions / variables / data, and
-human-readable code
+  human-readable, well-linted code
 + Specific and general error handling
 + Logging with rotation / archival
 + Detailed docstrings and type-hinting
 + Inline comments to explain complicated code / concepts to developers
 + Adherence to a consistent style guide and syntax, and use of linters
 + Well-organized Notebooks with logical ordering and “run-all” internal flow,
-and plenty of explanatory text and commentary to guide the reader
+  and plenty of explanatory text and commentary to guide the reader
 + Use of virtual environments and/or containers
 + Build scripts for continuous integration and deployment
 + Unit tests and automated test scripts
 + Documentation to allow full reproducibility and maintenance
 + Commits have meaningful messages and small, iterative, manageable diffs to
-allow code review
-+ Adherence to conventional branching structures and management of stale
-branches
+  allow code review
++ Adherence to conventional branching structures, management of stale branches
 + Merges into master managed via pull requests (PRs) comprised of specific
-commits, and the PR linked to specific issue tickets
+  commits, and the PR linked to specific issue tickets
 + PRs setup to trigger manual code reviews and automated hooks to code
-formatting, unit testing, continuous integration (inc. automated integration
-and regression testing) and continuous deployment
+  formatting, unit testing, continuous integration (inc. automated integration
+  and regression testing) and continuous deployment
 + New releases managed with tagging, fixed binaries, changelogs
 
 ---
 
-## 7. General Notes
+Copyright 2022 Oreum OÜ t/a Oreum Industries. All rights reserved.
+See LICENSE.md.
 
-None
+Oreum OÜ t/a Oreum Industries, Sepapaja 6, Tallinn, 15551, Estonia,
+reg.16122291, [oreum.io](https://oreum.io)
 
 ---
 Oreum OÜ &copy; 2022
