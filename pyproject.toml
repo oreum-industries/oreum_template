@@ -1,6 +1,6 @@
 [project]
 name = "oreum_template"
-version = "1.1.0"
+version = "1.1.1"
 description = "Oreum Industries Template Project Structure"
 readme = "README.md"
 license = {file = "LICENSE.md"}
@@ -36,6 +36,7 @@ dev = [
     "interrogate",
     "pipdeptree",
     "pip-licenses",
+    "playwright",
     "pre-commit",
     "pytest",
     "ruff",
@@ -43,7 +44,7 @@ dev = [
 ]
 # NOTE: separated out to allow Makefile dev to get from pypi (dev-js gets local)
 oreum_core_pypi = [
-    "oreum_core[pymc]>=0.9.9",  # the latest package using osx-arm64 Accelerate
+    "oreum_core[pymc]>=0.9.10",  # the latest package using osx-arm64 Accelerate
 ]
 
 [project.urls]
@@ -97,7 +98,7 @@ extend-exclude = [
 unfixable = ["B"]
 # allow unused underscore-prefix vars
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-# exclude = ["*.ipynb"]  # commented to _allow_ lint notebooks (useful)
+exclude = ["notebooks/archive/*.ipynb"]
 
 select = [
     "B",  # flake8-bugbear
@@ -129,6 +130,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "*.ipynb" = ["E402"]
 "config_slides.py" = ["F821"]
+"config_webpdf.py" = ["F821"]
 "config_pdf.py" = ["F821"]
 
 [tool.ruff.format]
