@@ -92,9 +92,9 @@ lint: ## run code linters and static security (checks only)
 
 
 slides: ## render slides (and webpdf) and place in publish/ dir
-	export PATH=$(MAMBADIR)/envs/vulcan/bin:$$PATH; \
-		export CONDA_ENV_PATH=$(MAMBADIR)/envs/vulcan/bin; \
-		export CONDA_DEFAULT_ENV=vulcan; \
+	export PATH=$(MAMBADIR)/envs/oreum_template/bin:$$PATH; \
+		export CONDA_ENV_PATH=$(MAMBADIR)/envs/oreum_template/bin; \
+		export CONDA_DEFAULT_ENV=oreum_template; \
 		cd notebooks; \
 		jupyter nbconvert --config renders/config_slides.py; \
 		jupyter nbconvert --config renders/config_webpdf.py
